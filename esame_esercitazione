@@ -31,3 +31,37 @@ pch=19)
 legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the function legend()
   col = unique(iris$Species), lty = 1, cex=0.4,)
 
+
+
+# exercise 2
+# To do a linear regression I have to use the function lm()
+
+lm(Petal.Width ~ Petal.Length, data=iris)$coefficients    # It gives me the results of the equation ???? capisci meglio
+
+plot(iris$Petal.Width, iris$Petal.Length, col=iris$Species,      # I plot again the graph
+main="Petal length vs width",        
+xlab="Petal Width",                  
+ylab="Petal Length",                 
+pch=19)
+
+legend(x="topleft",legend = c('setosa','versicolor','virginica'),  
+  col = unique(iris$Species), lty = 1, cex=0.5,)
+
+# And I add the line resulted by the linear regression
+abline(lm(Petal.Length ~ Petal.Width, data=iris)$coefficients, col="black")
+
+
+# I do the same thing with the linear regression of the sepal
+
+lm(Sepal.Width ~ Sepal.Length, data=iris)$coefficients
+
+plot(iris$Sepal.Width, iris$Sepal.Length, col=iris$Species,      
+main="Sepal length vs width",       
+xlab="Sepal Width",                  
+ylab="Sepal Length",                
+pch=19)
+
+legend(x="topleft",legend = c('setosa','versicolor','virginica'),  
+  col = unique(iris$Species), lty = 1, cex=0.5,)
+
+abline(lm(Sepal.Length ~ Sepal.Width, data=iris)$coefficients, col="black")
