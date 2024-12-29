@@ -1,0 +1,33 @@
+# the iris dataset is already built-in Rstudio
+data(iris)
+
+# to do a scatterplot of each species I have to recall them and give them a name
+virginica <- iris[iris$Sps=="virginica",]
+setosa <- iris[iris$Sps=="setosa",]
+versicolor <- iris[iris$Sps=="versicolor",]
+
+
+# Now I can do a framework with both the scatterplot
+par(mfrow=c(2,1))
+# now I can do a scatterplot comparing the length and the width of the petal, giving each species a different color
+
+plot(iris$Petal.Width, iris$Petal.Length, col=iris$Species,      # I use the function plot() specifing that I want to see the the petal data using $
+main="Petal length vs width",        # I give the name to the plot
+xlab="Petal Width",                  # I decide that x is the width
+ylab="Petal Length",                 # I decide that y is the length
+pch=19)
+
+# now I want to add the legend, specifing which species is which color
+legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the function legend()
+  col = unique(iris$Species), lty = 1, cex=0.5,) # I specify the colors and the size of the legend
+
+# Now I do the scatterplot comparing the length and the width of the sepal, adding the legend
+plot(iris$Sepal.Width, iris$Sepal.Length, col=iris$Species,      # I use the function plot() specifing that I want to see the the petal data using $
+main="Sepal length vs width",        # I give the name to the plot
+xlab="Sepal Width",                  # I decide that x is the width
+ylab="Sepal Length",                 # I decide that y is the length
+pch=19)
+
+legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the function legend()
+  col = unique(iris$Species), lty = 1, cex=0.4,)
+
