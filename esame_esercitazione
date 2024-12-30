@@ -129,7 +129,7 @@ plot(PL, PW,
      ylab = "Petal Width")
 
 # I add the legend
-legend("topright", legend = unique(clusters), 
+legend("topleft", legend = unique(clusters), 
        col = unique(clusters), 
        pch = 19, 
        title = "Cluster")
