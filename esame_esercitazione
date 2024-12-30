@@ -18,10 +18,10 @@ versicolor <- iris[iris$Sps=="versicolor",]
 par(mfrow=c(2,1))
 # now I can do a scatterplot comparing the length and the width of the petal, giving each species a different color
 
-plot(PW, PL, col=iris$Species,      # I use the function plot() specifing that I want to see the the petal data using $
+plot(PL, PW, col=iris$Species,      # I use the function plot() specifing that I want to see the the petal data using $
 main="Petal length vs width",        # I give the name to the plot
-xlab="Petal Width",                  # I decide that x is the width
-ylab="Petal Length",                 # I decide that y is the length
+xlab="Petal Length",                  # I decide that x is the width
+ylab="Petal Width",                 # I decide that y is the length
 pch=19)
 
 # now I want to add the legend, specifing which species is which color
@@ -29,10 +29,10 @@ legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the f
   col = unique(iris$Species), lty = 1, cex=0.5,) # I specify the colors and the size of the legend
 
 # Now I do the scatterplot comparing the length and the width of the sepal, adding the legend
-plot(SW, SL, col=iris$Species,      # I use the function plot() specifing that I want to see the the petal data using $
+plot(SL, SW, col=iris$Species,      # I use the function plot() specifing that I want to see the the petal data using $
 main="Sepal length vs width",        # I give the name to the plot
-xlab="Sepal Width",                  # I decide that x is the width
-ylab="Sepal Length",                 # I decide that y is the length
+xlab="Sepal Length",                  # I decide that x is the width
+ylab="Sepal Width",                 # I decide that y is the length
 pch=19)
 
 legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the function legend()
@@ -45,10 +45,10 @@ legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the f
 
 lm(Petal.Width ~ Petal.Length, data=iris)$coefficients    # It gives me the results of the equation ???? capisci meglio
 
-plot(PW, PL, col=iris$Species,      # I plot again the graph
+plot(PL, PW, col=iris$Species,      # I plot again the graph
 main="Petal length vs width",        
-xlab="Petal Width",                  
-ylab="Petal Length",                 
+xlab="Petal Length",                  
+ylab="Petal Width",                 
 pch=19)
 
 # And I add the line resulted by the linear regression
@@ -59,10 +59,10 @@ abline(lm(Petal.Length ~ Petal.Width, data=iris)$coefficients, col="black")
 
 lm(Sepal.Width ~ Sepal.Length, data=iris)$coefficients
 
-plot(SW, SL, col=iris$Species,      
+plot(SL, SW, col=iris$Species,      
 main="Sepal length vs width",       
-xlab="Sepal Width",                  
-ylab="Sepal Length",      
+xlab="Sepal Length",                  
+ylab="Sepal Width",      
 pch=19)
 
 abline(lm(Sepal.Length ~ Sepal.Width, data=iris)$coefficients, col="black")
@@ -89,4 +89,48 @@ lines(density(SW))
 hist(PW, freq=FALSE, main="Histogram of Petal Width", 
 xlab="Petal Width")
 lines(density(PW))
+
+# Exercise 4
+# hierarchical clustering of the iris dataset applying the 'complete' method
+
+# i want to see all the iris dataset
+data(iris)
+
+# I have to remove the column with the list of the species because it contains categories and they cannot be calculated in the distances
+iris_data <- iris[, -5]
+
+# I calculate the matrix after scaling the data
+iris_dist <- dist(scale(iris_data))
+
+# I apply the hierarchial clustering of the data with the complete method
+iris_hc <- hclust(iris_dist)
+
+# Then I can do a plot of the dendogram
+plot(iris_hc, main = "Hierarchical clustering dendogram", xlab = "", sub = "", cex = 0.8)
+
+# Now I can compare the cluster to each species
+# I divide the dendogram in 3 clusters
+clusters <- cutree(iris_hc, k = 3)
+
+# I add the groups to the original dataset
+iris$Cluster <- clusters
+
+# Finally I can compare them
+contingency_table <- table(iris$Cluster, iris$Species)
+print(contingency_table)
+
+# Now I reuse the graph to give a graphic rappresentation of the clusters
+# Scatterplot con colori per i cluster
+plot(PL, PW, 
+     col = clusters, 
+     pch = 19, 
+     main = "Cluster vs Width and Length of the Petal",
+     xlab = "Petal Length", 
+     ylab = "Petal Width")
+
+# I add the legend
+legend("topright", legend = unique(clusters), 
+       col = unique(clusters), 
+       pch = 19, 
+       title = "Cluster")
 
