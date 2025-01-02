@@ -15,7 +15,7 @@ versicolor <- iris[iris$Sps=="versicolor",]
 
 
 # Now I can do a framework with both the scatterplot
-par(mfrow=c(2,1))
+par(mfrow=c(1,2))
 # now I can do a scatterplot comparing the length and the width of the petal, giving each species a different color
 
 plot(PL, PW, col=iris$Species,      # I use the function plot() specifing that I want to see the the petal data using $
