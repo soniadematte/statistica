@@ -31,8 +31,8 @@ legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the f
 # Now I do the scatterplot comparing the length and the width of the sepal, adding the legend
 plot(SL, SW, col=iris$Species,      # I use the function plot() specifing that I want to see the the petal data using $
 main="Sepal length vs width",        # I give the name to the plot
-xlab="Sepal Length",                  # I decide that x is the width
-ylab="Sepal Width",                 # I decide that y is the length
+xlab="Sepal Length",                  # I decide that x is the length
+ylab="Sepal Width",                 # I decide that y is the width
 pch=19)
 
 legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the function legend()
@@ -52,7 +52,7 @@ ylab="Petal Width",
 pch=19)
 
 # And I add the line resulted by the linear regression
-abline(lm(Petal.Length ~ Petal.Width, data=iris)$coefficients, col="black")
+abline(lm(Petal.Width ~ Petal.Length, data=iris)$coefficients, col="black", lty=1, lwd=2)
 
 
 # I do the same thing with the linear regression of the sepal
@@ -65,7 +65,7 @@ xlab="Sepal Length",
 ylab="Sepal Width",      
 pch=19)
 
-abline(lm(Sepal.Length ~ Sepal.Width, data=iris)$coefficients, col="black")
+abline(lm(Sepal.Width ~ Sepal.Length, data=iris)$coefficients, col="black", lty=1, lwd=2)
 
 # Exercise 3
 
@@ -78,17 +78,20 @@ shapiro.test(SW)
 # I build an histogram for sepal width
 
 hist(SW, freq=FALSE, main="Histogram of Sepal Width",   # I use the function 'hist' to generate an histogramm, and the option freq=FALSE to plot probability densities instead of frequencies. 
-xlab="Sepal Width")
+xlab="Sepal Width",
+col="yellow")
 
 # now I create and put the density line on the plot
 
-lines(density(SW))
+lines(density(SW), col="tomato3", lwd=2)
 
 # I do the same with petal width
 
 hist(PW, freq=FALSE, main="Histogram of Petal Width", 
-xlab="Petal Width")
-lines(density(PW))
+xlab="Petal Width",
+col="cadetblue1")
+
+lines(density(PW), col="tomato3", lwd=2)
 
 # Exercise 4
 # hierarchical clustering of the iris dataset applying the 'complete' method
