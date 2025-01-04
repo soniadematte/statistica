@@ -42,10 +42,11 @@ legend(x="topleft",legend = c('setosa','versicolor','virginica'),  # I use the f
 
 # exercise 2
 # To do a linear regression I have to use the function lm()
+par(mfrow=c(1,2))
 
 lm(Petal.Width ~ Petal.Length, data=iris)$coefficients    # It gives me the results of the equation ???? capisci meglio
 
-plot(PL, PW, col=iris$Species,      # I plot again the graph
+plot(PL, PW,       # I plot again the graph without the colors
 main="Petal length vs width",        
 xlab="Petal Length",                  
 ylab="Petal Width",                 
@@ -59,7 +60,7 @@ abline(lm(Petal.Width ~ Petal.Length, data=iris)$coefficients, col="black", lty=
 
 lm(Sepal.Width ~ Sepal.Length, data=iris)$coefficients
 
-plot(SL, SW, col=iris$Species,      
+plot(SL, SW,     
 main="Sepal length vs width",       
 xlab="Sepal Length",                  
 ylab="Sepal Width",      
@@ -76,6 +77,7 @@ shapiro.test(PW)
 shapiro.test(SW)
 
 # I build an histogram for sepal width
+par(mfrow=c(1,2)) 
 
 hist(SW, freq=FALSE, main="Histogram of Sepal Width",   # I use the function 'hist' to generate an histogramm, and the option freq=FALSE to plot probability densities instead of frequencies. 
 xlab="Sepal Width",
